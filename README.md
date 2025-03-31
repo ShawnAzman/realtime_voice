@@ -1,6 +1,6 @@
 # Realtime API Agents Demo
 
-This is a simple demonstration of more advanced, agentic patterns built on top of the Realtime API. In particular, this demonstrates:
+This is a simple demonstration of more advanced, agentic patterns built on top of the Realtime API. In particular, this demo showcases:
 - Sequential agent handoffs according to a defined agent graph (taking inspiration from [OpenAI Swarm](https://github.com/openai/swarm))
 - Background escalation to more intelligent models like o1-mini for high-stakes decisions
 - Prompting models to follow a state machine, for example to accurately collect things like names and phone numbers with confirmation character by character to authenticate a user.
