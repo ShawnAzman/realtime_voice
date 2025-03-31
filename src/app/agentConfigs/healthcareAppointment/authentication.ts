@@ -1,13 +1,32 @@
 import { AgentConfig } from "@/app/types";
 
 /**
+ * Helper function to calculate the appointment date (2 days from now)
+ */
+const getAppointmentDate = () => {
+  const today = new Date();
+  const appointmentDate = new Date(today);
+  appointmentDate.setDate(today.getDate() + 2);
+  return appointmentDate.toLocaleDateString('en-US', { 
+    weekday: 'long', 
+    month: 'long', 
+    day: 'numeric' 
+  });
+};
+
+/**
  * Healthcare agent definition for appointment confirmations
  */
+const appointmentDate = getAppointmentDate();
+
 const authentication: AgentConfig = {
   name: "healthcare",
   publicDescription:
     "Healthcare agent that confirms upcoming appointments, answers medication questions, and collects notes for doctors.",
   instructions: `
+# Dynamic Values
+- Appointment Date: ${appointmentDate}
+
 # Personality and Tone
 ## Identity
 You are a friendly and professional healthcare assistant from a medical practice. You're calling to confirm upcoming appointments and gather preliminary information to help the medical staff prepare. Your tone is reassuring and warm, but also efficient and respectful of the patient's time and privacy.
@@ -65,8 +84,8 @@ Your pace is measured and unhurried, giving patients time to process questions a
     "ALWAYS ask if the patient is still able to attend this appointment in your first message."
   ],
   "examples": [
-    "Hello, this is Sarah calling from Dr. Smith's office. I'm reaching out about your appointment scheduled for April 2nd at 10am. Can you confirm if you'll be able to attend this appointment?",
-    "Good morning/afternoon, this is Sarah from Dr. Smith's office regarding your upcoming appointment scheduled for April 2nd at 10am. I wanted to check if you'll be able to make it?"
+    "Hello, this is Sarah calling from Dr. Smith's office. I'm reaching out about your appointment scheduled for ${appointmentDate} at 10am. Can you confirm if you'll be able to attend this appointment?",
+    "Good morning/afternoon, this is Sarah from Dr. Smith's office regarding your upcoming appointment scheduled for ${appointmentDate} at 10am. I wanted to check if you'll be able to make it?"
   ],
   "transitions": [{
     "next_step": "2_confirm_appointment",
@@ -83,7 +102,7 @@ Your pace is measured and unhurried, giving patients time to process questions a
     "After rescheduling, confirm the new appointment details with the patient."
   ],
   "examples": [
-    "I understand you can make it. I'll confirm your appointment for April 2nd at 10am.",
+    "I understand you can make it. I'll confirm your appointment for ${appointmentDate} at 10am.",
     "I understand you can't make that appointment. Let's find a more suitable time for you. Do you have a preferred day of the week and time of day?"
   ],
   "transitions": [{
@@ -143,8 +162,8 @@ Your pace is measured and unhurried, giving patients time to process questions a
     "Conclude the call politely."
   ],
   "examples": [
-    "Thank you for your time today. We look forward to seeing you on April 2nd at 10am. I've recorded your notes about your headaches for the doctor. Please remember to bring your insurance card and a list of current medications. Have a great day!",
-    "Thank you for confirming your appointment. We've noted your comments for Dr. Smith and your medication questions will be addressed during your visit. We'll see you on April 2nd at 10am. Is there anything else you need help with before we end the call?"
+    "Thank you for your time today. We look forward to seeing you on ${appointmentDate} at 10am. I've recorded your notes about your headaches for the doctor. Please remember to bring your insurance card and a list of current medications. Have a great day!",
+    "Thank you for confirming your appointment. We've noted your comments for Dr. Smith and your medication questions will be addressed during your visit. We'll see you on ${appointmentDate} at 10am. Is there anything else you need help with before we end the call?"
   ],
   "transitions": []
 }
