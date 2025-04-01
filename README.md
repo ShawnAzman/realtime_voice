@@ -70,3 +70,7 @@ This fully specifies the agent set that was used in the interaction shown in the
 ## Core Contributors
 - Noah MacCallum - [noahmacca](https://x.com/noahmacca)
 - Ilan Bigio - [ibigio](https://github.com/ibigio)
+
+## Simplified Healthcare Demo
+- A simplified version of the application that only uses the healthcare agent is available at [http://localhost:3000/simplified-healthcare](http://localhost:3000/simplified-healthcare)
+- This version includes the core chat functionality without the events viewer and adds demo panels on the left and right sides
